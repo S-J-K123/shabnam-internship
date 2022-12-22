@@ -5,6 +5,7 @@ import nftImage from "../../images/nftImage.jpg";
 
 const ExploreItems = () => {
   return (
+    
     <>
       <div>
         <select id="filter-items" defaultValue="">
