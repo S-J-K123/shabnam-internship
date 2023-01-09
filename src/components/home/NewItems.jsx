@@ -113,9 +113,9 @@ const settings = {
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
-                { // type component here
+                { 
                   image.expiryDate ? (
-                    <div  className="de_countdown">  <Timer minutesFromNow={58}/> </div>
+                    <div  className="de_countdown"> <Timer expiryDate={image.expiryDate} /> </div>
                   ) : null
                 }
                 

@@ -10,14 +10,15 @@ import { Skeleton } from "@mui/material";
 import Timer from "./components/Timer";
 
 function App() {
-
   <div>
-    <Carousel/>
-  </div>
-
+    <Carousel />
+    <Timer expiryDate={1673315129468} />
+    <Timer expiryDate={1673307995523} />
+    <Timer expiryDate={1673311475523} />
+    <Timer expiryDate={1673316275523} />
+  </div>;
 
   return (
-
     <Router>
       <Nav />
       <Routes>
