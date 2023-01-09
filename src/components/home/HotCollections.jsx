@@ -17,8 +17,7 @@ import Skeleton from '../UI/Skeleton'
 const HotCollections = () => {
 const [posts, setPosts] = useState([])
 const [loading, setLoading] = useState(true)
-  // 1024 -> tablet
-  // 500 -> mobile
+
   const settings = {
     infinite: false,
     speed: 700,
@@ -87,7 +86,7 @@ const [loading, setLoading] = useState(true)
                         </div>
                         <div className="nft_coll_pp">
                         <Link to="/author">
-                        <img className="lazy pp-coll" src={AuthorImage} alt="" />
+                        <img className="lazy pp-coll" src={post.authorImage} alt="" />
                         </Link>
                         <i className="fa fa-check"></i>
                         </div>

@@ -7,9 +7,17 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Carousel from "./components/Carousel";
 import { Skeleton } from "@mui/material";
+import Timer from "./components/Timer";
+
 function App() {
-  <Carousel/>
+
+  <div>
+    <Carousel/>
+  </div>
+
+
   return (
+
     <Router>
       <Nav />
       <Routes>
