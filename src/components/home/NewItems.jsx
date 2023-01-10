@@ -2,7 +2,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import 'slick-carousel/slick/slick.css'
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 import { useRef } from 'react'
@@ -16,10 +16,7 @@ const NewItems = () => {
 const [images, setImages] = useState([])
 const[loading, setLoading] = useState(true)
 
-
-// countdown
-
-
+const { id } = useParams();
 
 
 
@@ -99,7 +96,7 @@ const settings = {
             return (
               <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
                   {loading ? (
-                        <Skeleton width={"300px"} height={"300px"} borderRadius={"14%"} />
+                        <Skeleton width={"300px"} height={"450px"} borderRadius={"14%"} />
                       ) : (
               <div className="nft__item">
                 <div className="author_list_pp">
@@ -139,7 +136,7 @@ const settings = {
                     </div>
                   </div>
 
-                  <Link to="/item-details">
+                  <Link to={`/item-details/${image.nftId}`}>
                     <img
                       src={image.nftImage}
                       className="lazy nft__item_preview"
