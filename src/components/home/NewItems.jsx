@@ -16,7 +16,12 @@ const NewItems = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { id } = useParams();
+
+
+
+
+
+
 
   const settings = {
     infinite: false,
@@ -73,6 +78,10 @@ const NewItems = () => {
     }
     fetchImages();
   });
+
+
+
+  
 
   const slider = useRef(null);
   return (
