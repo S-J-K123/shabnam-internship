@@ -201,22 +201,20 @@
   }
 }
 
-
 @media (max-width: 531px) {
-    .de_countdown {
-      margin: -14px;
-    }
+  .de_countdown {
+    margin: -14px;
   }
+}
 
-  @media (max-width: 305px) {
-    .de_countdown {
-      margin: -6px;
-    }
+@media (max-width: 305px) {
+  .de_countdown {
+    margin: -6px;
   }
+}
 
-  @media (max-width: 293px) {
-    .de_countdown {
-      font-size: 10px;
-    }
+@media (max-width: 293px) {
+  .de_countdown {
+    font-size: 10px;
   }
- 
+}

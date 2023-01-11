@@ -1,14 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function Timer(props) {
-
   const [hours, setHours] = useState(60);
   const [minutes, setMinutes] = useState(60);
   const [seconds, setSeconds] = useState(60);
 
- 
   const [loading, setLoading] = useState(true);
-
 
   const intervalRef = useRef(null);
 
@@ -27,7 +24,6 @@ export default function Timer(props) {
     return () => clearInterval(intervalRef.current);
   }, []);
 
- 
   useEffect(() => {
     if (hours === 0 && minutes === 0 && seconds === 0) {
       clearInterval(intervalRef.current);
@@ -38,7 +34,7 @@ export default function Timer(props) {
 
   return (
     <div>
-      {hours}h  {minutes}m  {seconds}s
+      {hours}h {minutes}m {seconds}s
     </div>
   );
 }
