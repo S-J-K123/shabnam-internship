@@ -13,16 +13,20 @@ const ItemDetails = () => {
   useEffect(() => {
     async function fetchId() {
       const { data } = await axios.get(
-        `https://us-central1-nft-cloud-functions.cloudfunctions.net/${id}`
+        // `https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems/${id}`
+        `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${id}`
+        
       );
       setImages(data);
+      ;
       setTimeout(() => {
         setLoading(false);
-      }, 3000);
+      }, 5000);
+      
     }
     fetchId(id);
 
-    console.log(data);
+  
 
     window.scrollTo(0, 0);
   }, [id]);
@@ -33,18 +37,22 @@ const ItemDetails = () => {
         <div id="top"></div>
         <section aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
+
             {images.map((image) => (
+              
               <div className="row">
+                
                 <div className="col-md-6 text-center">
                   <img
-                    src={nftImage}
+                    src={image.nftImage}
                     className="img-fluid img-rounded mb-sm-30 nft-image"
                     alt=""
                   />
                 </div>
+           
                 <div className="col-md-6">
                   <div className="item_info">
-                    <h2>Rainbow Style #194</h2>
+                    <h2>{image.title}</h2>
 
                     <div className="item_info_counts">
                       <div className="item_info_views">
@@ -53,7 +61,7 @@ const ItemDetails = () => {
                       </div>
                       <div className="item_info_like">
                         <i className="fa fa-heart"></i>
-                        74
+                       {image.likes}
                       </div>
                     </div>
                     <p>
@@ -88,6 +96,7 @@ const ItemDetails = () => {
                               <i className="fa fa-check"></i>
                             </Link>
                           </div>
+                        
                           <div className="author_list_info">
                             <Link to="/author">Monica Lucas</Link>
                           </div>
@@ -97,13 +106,16 @@ const ItemDetails = () => {
                       <h6>Price</h6>
                       <div className="nft-item-price">
                         <img src={EthImage} alt="" />
-                        <span>1.85</span>
+                        <span>{image.price}</span>
                       </div>
+                    
                     </div>
                   </div>
                 </div>
               </div>
+              
             ))}
+ 
           </div>
         </section>
       </div>
