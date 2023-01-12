@@ -15,18 +15,13 @@ const ItemDetails = () => {
       const { data } = await axios.get(
         // `https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems/${id}`
         `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${id}`
-        
       );
       setImages(data);
-      ;
       setTimeout(() => {
         setLoading(false);
       }, 5000);
-      
     }
     fetchId(id);
-
-  
 
     window.scrollTo(0, 0);
   }, [id]);
@@ -37,11 +32,8 @@ const ItemDetails = () => {
         <div id="top"></div>
         <section aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
-
             {images.map((image) => (
-              
               <div className="row">
-                
                 <div className="col-md-6 text-center">
                   <img
                     src={image.nftImage}
@@ -49,7 +41,7 @@ const ItemDetails = () => {
                     alt=""
                   />
                 </div>
-           
+
                 <div className="col-md-6">
                   <div className="item_info">
                     <h2>{image.title}</h2>
@@ -61,7 +53,7 @@ const ItemDetails = () => {
                       </div>
                       <div className="item_info_like">
                         <i className="fa fa-heart"></i>
-                       {image.likes}
+                        {image.likes}
                       </div>
                     </div>
                     <p>
@@ -96,7 +88,7 @@ const ItemDetails = () => {
                               <i className="fa fa-check"></i>
                             </Link>
                           </div>
-                        
+
                           <div className="author_list_info">
                             <Link to="/author">Monica Lucas</Link>
                           </div>
@@ -108,14 +100,11 @@ const ItemDetails = () => {
                         <img src={EthImage} alt="" />
                         <span>{image.price}</span>
                       </div>
-                    
                     </div>
                   </div>
                 </div>
               </div>
-              
             ))}
- 
           </div>
         </section>
       </div>
