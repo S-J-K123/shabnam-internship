@@ -12,25 +12,20 @@ const ItemDetails = () => {
 
   useEffect(() => {
     async function fetchId() {
-      const { id } = await axios.get(
+      const { data } = await axios.get(
         `https://us-central1-nft-cloud-functions.cloudfunctions.net/${id}`
       );
-      setImages(id.data);
+      setImages(data);
       setTimeout(() => {
         setLoading(false);
       }, 3000);
     }
     fetchId(id);
 
+    console.log(data);
+
     window.scrollTo(0, 0);
   }, [id]);
-
-
-
-
-
-
-  
 
   return (
     <div id="wrapper">
@@ -38,6 +33,7 @@ const ItemDetails = () => {
         <div id="top"></div>
         <section aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
+            {images.map((image) => (
               <div className="row">
                 <div className="col-md-6 text-center">
                   <img
@@ -106,7 +102,8 @@ const ItemDetails = () => {
                     </div>
                   </div>
                 </div>
-              </div>;
+              </div>
+            ))}
           </div>
         </section>
       </div>
