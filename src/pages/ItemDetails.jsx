@@ -37,6 +37,7 @@ const ItemDetails = () => {
                     borderRadius={"14%"}
                   />
                     ) : (
+                      
             <div className="row">
               <div className="col-md-6 text-center">
                 <img
@@ -75,12 +76,12 @@ const ItemDetails = () => {
                             <i className="fa fa-check"></i>
                           </Link>
                         </div>
+                        
                         <div className="author_list_info">
                           <Link to="/author">{images.ownerName}</Link>
                         </div>
                       </div>
                     </div>
-                    <div></div>
                   </div>
                   <div className="de_tab tab_simple">
                     <div className="de_tab_content">
@@ -111,6 +112,7 @@ const ItemDetails = () => {
                 </div>
               </div>
             </div>
+        
                 )}
           </div>
         </section>
