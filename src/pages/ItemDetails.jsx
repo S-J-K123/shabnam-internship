@@ -8,18 +8,20 @@ import nftImage from "../images/nftImage.jpg";
 const ItemDetails = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(id);
 
   useEffect(() => {
     async function fetchId() {
       const { data } = await axios.get(
         // `https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems/${id}`
         `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${id}`
+ 
       );
       setImages(data);
       setTimeout(() => {
         setLoading(false);
       }, 5000);
+    
     }
     fetchId(id);
 
@@ -32,11 +34,11 @@ const ItemDetails = () => {
         <div id="top"></div>
         <section aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
-            {images.map((image) => (
+          
               <div className="row">
                 <div className="col-md-6 text-center">
                   <img
-                    src={image.nftImage}
+                    src={id.nftImage}
                     className="img-fluid img-rounded mb-sm-30 nft-image"
                     alt=""
                   />
@@ -44,7 +46,7 @@ const ItemDetails = () => {
 
                 <div className="col-md-6">
                   <div className="item_info">
-                    <h2>{image.title}</h2>
+                    <h2>{id.title}</h2>
 
                     <div className="item_info_counts">
                       <div className="item_info_views">
@@ -53,11 +55,11 @@ const ItemDetails = () => {
                       </div>
                       <div className="item_info_like">
                         <i className="fa fa-heart"></i>
-                        {image.likes}
+                        {id.likes}
                       </div>
                     </div>
                     <p>
-                      doloremque laudantium, totam rem aperiam, eaque ipsa quae
+                     doloremque laudantium, totam rem aperiam, eaque ipsa quae
                       ab illo inventore veritatis et quasi architecto beatae
                       vitae dicta sunt explicabo.
                     </p>
@@ -98,13 +100,13 @@ const ItemDetails = () => {
                       <h6>Price</h6>
                       <div className="nft-item-price">
                         <img src={EthImage} alt="" />
-                        <span>{image.price}</span>
+                        <span>{id.price}</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
+            
           </div>
         </section>
       </div>
