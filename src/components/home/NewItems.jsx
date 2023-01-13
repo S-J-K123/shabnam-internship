@@ -73,7 +73,7 @@ const NewItems = () => {
       setImages(data);
       setTimeout(() => {
         setLoading(false);
-      }, 3000);
+      }, 2000);
       console.log(data);
     }
     fetchImages();

@@ -5,21 +5,13 @@ import Author from "./pages/Author";
 import ItemDetails from "./pages/ItemDetails";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import Carousel from "./components/Carousel";
-import { Skeleton } from "@mui/material";
-import Timer from "./components/Timer";
+
 
 function App() {
-  return (
-  <div>
-    <Carousel />
-    <Timer expiryDate={1673315129468} />
-    <Timer expiryDate={1673307995523} />
-    <Timer expiryDate={1673311475523} />
-    <Timer expiryDate={1673316275523} />
-  </div>,
 
+  return (
     <Router>
+        <div>
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -28,7 +20,9 @@ function App() {
         <Route path="/item-details/:id" element={<ItemDetails />} />
       </Routes>
       <Footer />
+      </div>
     </Router>
+    
   );
 }
 export default App;
