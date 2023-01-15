@@ -32,8 +32,8 @@ const ItemDetails = () => {
           <div className="container">
           {loading ? (
                   <Skeleton
-                    width={"300px"}
-                    height={"300px"}
+                    width={"600px"}
+                    height={"400px"}
                     borderRadius={"14%"}
                   />
                     ) : (
@@ -45,7 +45,8 @@ const ItemDetails = () => {
                   className="img-fluid img-rounded mb-sm-30 nft-image"
                   alt=""
                 />
-              </div>           
+              </div>   
+                  
               <div className="col-md-6">
                 <div className="item_info">
                   <h2>

@@ -77,7 +77,7 @@ const NewItems = () => {
       console.log(data);
     }
     fetchImages();
-  });
+  }, []);
 
 
 

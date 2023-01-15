@@ -15,9 +15,10 @@ export default function Timer(props) {
 
       const timeRemaining = props.expiryDate - currentDate;
 
-      setHours(Math.floor(timeRemaining / (1000 * 60 * 60)));
-      setMinutes(Math.floor((timeRemaining / (1000 * 60)) % 60));
-      setSeconds(Math.floor((timeRemaining / 1000) % 60));
+      setHours(Math.max(Math.floor(timeRemaining / (1000 * 60 * 60)), 0));
+      setMinutes(Math.max(Math.floor((timeRemaining / (1000 * 60)) % 60), 0));
+      setSeconds(Math.max(Math.floor((timeRemaining / 1000) % 60), 0));
+      
       setLoading(false);
     }, 1000);
 
