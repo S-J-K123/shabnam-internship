@@ -7,7 +7,6 @@ import axios from "axios";
 
 const Author = () => {
 const { id } = useParams()
-
 const[authors, setAuthors] = useState({})
 
 
@@ -18,6 +17,10 @@ useEffect(() => {
   }
   getId()
 }, [id])
+
+
+
+
 
 
   return ( 
