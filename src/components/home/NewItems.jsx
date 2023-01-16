@@ -3,8 +3,7 @@ import "slick-carousel/slick/slick.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
+
 import { useRef } from "react";
 import Skeleton from "../UI/Skeleton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -127,7 +126,7 @@ const NewItems = () => {
                       </div>
                       {image.expiryDate ? (
                         <div className="de_countdown">
-                          {" "}
+                          {" "} 
                           <Timer expiryDate={image.expiryDate} />{" "}
                         </div>
                       ) : null}

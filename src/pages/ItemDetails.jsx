@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import EthImage from "../images/ethereum.svg";
 import { Link, useParams } from "react-router-dom";
-import { Skeleton } from "@mui/material";
+import ItemDetailsSkeleton from "../components/ItemDetailsSkeleton";
 
 const ItemDetails = () => {
   const { id } = useParams();
@@ -31,11 +31,7 @@ const ItemDetails = () => {
         <section aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
           {loading ? (
-                  <Skeleton
-                    width={"600px"}
-                    height={"400px"}
-                    borderRadius={"14%"}
-                  />
+               <ItemDetailsSkeleton/>
                     ) : (
                       
             <div className="row">
