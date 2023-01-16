@@ -5,21 +5,24 @@ import Author from "./pages/Author";
 import ItemDetails from "./pages/ItemDetails";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import Carousel from "./components/Carousel";
-import { Skeleton } from "@mui/material";
+
+
 function App() {
-  <Carousel/>
+
   return (
     <Router>
+        <div>
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/author" element={<Author />} />
-        <Route path="/item-details" element={<ItemDetails />} />
+        <Route path="/item-details/:id" element={<ItemDetails />} />
       </Routes>
       <Footer />
+      </div>
     </Router>
+    
   );
 }
 export default App;
