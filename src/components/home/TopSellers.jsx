@@ -1,10 +1,28 @@
-import React from "react";
+import { Skeleton } from "@mui/material";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
+import TopSellersSkeleton from "../TopSellersSkeleton";
 
 const TopSellers = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // work
+  useEffect(() => {
+    async function fetchPosts() {
+      const { data } = await axios.get(
+        "https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers"
+      );
+      setPosts(data);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
+      console.log(data);
+    }
+    fetchPosts();
+  }, []);
+
   return (
     <section id="section-popular" className="pb-5">
       <div className="container">
@@ -16,26 +34,36 @@ const TopSellers = () => {
             </div>
           </div>
           <div className="col-md-12">
-            <ol className="author_list">
-              {new Array(12).fill(0).map((_, index) => (
-                <li key={index}>
-                  <div className="author_list_pp">
-                    <Link to="/author">
-                      <img
-                        className="lazy pp-author"
-                        src={AuthorImage}
-                        alt=""
-                      />
-                      <i className="fa fa-check"></i>
-                    </Link>
-                  </div>
-                  <div className="author_list_info">
-                    <Link to="/author">Monica Lucas</Link>
-                    <span>2.1 ETH</span>
-                  </div>
-                </li>
-              ))}
+            {
+              loading ? (
+                <TopSellersSkeleton posts={posts} width={"200px"}/>
+              ) : (
+                   <ol className="author_list">
+              {posts.map((post, index) => {
+                return (
+                  <li key={index}>
+                    <div className="author_list_pp">
+                      <Link to={`/author/${post.id}`}>
+                        <img
+                          className="lazy pp-author"
+                          src={post.authorImage}
+                          alt=""
+                        />
+                        <i className="fa fa-check"></i>
+                      </Link>
+                    </div>
+                    <div className="author_list_info">
+                      <Link to="/author">{post.authorName}</Link>
+                      <span>{post.price}</span>
+                    </div>
+                  </li>
+                );
+              })}
             </ol>
+              )
+            }
+         
+
           </div>
         </div>
       </div>

@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
+import axios from "axios";
 
 const Author = () => {
-  return (
+const { id } = useParams()
+
+const[authors, setAuthors] = useState({})
+
+
+useEffect(() => {
+  async function getId() {
+    const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`)
+    setAuthors(data)
+  }
+  getId()
+}, [id])
+
+
+  return ( 
     <div id="wrapper">
+    
       <div className="no-bottom no-top" id="content">
         <div id="top"></div>
 
