@@ -7,7 +7,7 @@ import axios from "axios";
 
 const Author = () => {
 const { id } = useParams()
-const[authors, setAuthors] = useState({})
+const[authors, setAuthors] = useState([])
 
 
 useEffect(() => {
@@ -24,8 +24,7 @@ useEffect(() => {
 
 
   return ( 
-    <div id="wrapper">
-    
+    <div id="wrapper"> 
       <div className="no-bottom no-top" id="content">
         <div id="top"></div>
 
