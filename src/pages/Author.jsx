@@ -4,12 +4,13 @@ import AuthorItems from "../components/author/AuthorItems";
 import { Link, useParams } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import axios from "axios";
-import { PostAddSharp } from "@mui/icons-material";
+
 
 const Author = () => {
   const { id } = useParams();
   const [authors, setAuthors] = useState({});
 
+  
   useEffect(() => {
     async function getId() {
       const { data } = await axios.get(
@@ -20,16 +21,10 @@ const Author = () => {
     getId();
   }, [id]);
 
-  //   async function getId() {
-  // const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`)
-  // setAuthors(data)
-  //   }
 
-  //   useEffect(() => {
-  // getId()
-  //   }, [getId])
 
   return (
+   
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
         <div id="top"></div>
@@ -41,9 +36,7 @@ const Author = () => {
           data-bgimage="url(images/author_banner.jpg) top"
           style={{ background: `url(${AuthorBanner}) top` }}
         ></section>
-{
-  authors.map((author) =>{
-    return(
+
        <section aria-label="section">
           <div className="container">
             <div className="row">
@@ -87,9 +80,7 @@ const Author = () => {
             </div>
           </div>
         </section>
-    )
-  })
-}
+ 
        
       </div>
     </div>
