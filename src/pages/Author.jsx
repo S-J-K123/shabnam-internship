@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Author = () => {
   const { id } = useParams();
-  const [authors, setAuthors] = useState({});
+  const [authors, setAuthors] = useState([]);
 
   
   useEffect(() => {
@@ -26,7 +26,8 @@ const Author = () => {
   return (
    
     <div id="wrapper">
-      <div className="no-bottom no-top" id="content">
+  
+                <div className="no-bottom no-top" id="content">
         <div id="top"></div>
 
         <section
@@ -38,7 +39,8 @@ const Author = () => {
         ></section>
 
        <section aria-label="section">
-          <div className="container">
+
+                <div className="container">
             <div className="row">
               <div className="col-md-12">
                 <div className="d_profile de-flex">
@@ -79,10 +81,14 @@ const Author = () => {
               </div>
             </div>
           </div>
+      
+        
         </section>
  
        
       </div>
+        
+  
     </div>
   );
 };
