@@ -4,27 +4,33 @@ import AuthorItems from "../components/author/AuthorItems";
 import { Link, useParams } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import axios from "axios";
+import { PostAddSharp } from "@mui/icons-material";
 
 const Author = () => {
-const { id } = useParams()
-const[authors, setAuthors] = useState([])
+  const { id } = useParams();
+  const [authors, setAuthors] = useState({});
 
+  useEffect(() => {
+    async function getId() {
+      const { data } = await axios.get(
+        `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`
+      );
+      setAuthors(data);
+    }
+    getId();
+  }, [id]);
 
-useEffect(() => {
-  async function getId() {
-    const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`)
-    setAuthors(data)
-  }
-  getId()
-}, [id])
+  //   async function getId() {
+  // const { data } = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`)
+  // setAuthors(data)
+  //   }
 
+  //   useEffect(() => {
+  // getId()
+  //   }, [getId])
 
-
-
-
-
-  return ( 
-    <div id="wrapper"> 
+  return (
+    <div id="wrapper">
       <div className="no-bottom no-top" id="content">
         <div id="top"></div>
 
@@ -35,8 +41,10 @@ useEffect(() => {
           data-bgimage="url(images/author_banner.jpg) top"
           style={{ background: `url(${AuthorBanner}) top` }}
         ></section>
-
-        <section aria-label="section">
+{
+  authors.map((author) =>{
+    return(
+       <section aria-label="section">
           <div className="container">
             <div className="row">
               <div className="col-md-12">
@@ -48,7 +56,7 @@ useEffect(() => {
                       <i className="fa fa-check"></i>
                       <div className="profile_name">
                         <h4>
-                          Monica Lucas
+                          Monica Lewis
                           <span className="profile_username">@monicaaaa</span>
                           <span id="wallet" className="profile_wallet">
                             UDHUHWudhwd78wdt7edb32uidbwyuidhg7wUHIFUHWewiqdj87dy7
@@ -79,6 +87,10 @@ useEffect(() => {
             </div>
           </div>
         </section>
+    )
+  })
+}
+       
       </div>
     </div>
   );
