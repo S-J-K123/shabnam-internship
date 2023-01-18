@@ -5,10 +5,13 @@ import { Link, useParams } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import axios from "axios";
 
+
+
 const Author = () => {
   const { id } = useParams();
   const [authors, setAuthors] = useState([]);
-  const author = authors.find(author => author.id === 6);
+  const author = data.find(author => author.id === id);
+  
 
 
 
@@ -17,30 +20,26 @@ const Author = () => {
   
 
 
+  useEffect(() => {
+    async function getId() {
+      const { data } = await axios.get(
+        `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`
+      );
+      setAuthors(data);
+    }
+    getId();
+  }, [id]);
 
-
-
-
-
-  // useEffect(() => {
-  //   async function getId() {
-  //     const { data } = await axios.get(
-  //       `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`
-  //     );
-  //     setAuthors(data);
-  //   }
-  //   getId();
-  // }, [id]);
-
-
-  async function main() {
-    const response = await fetch ("https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=73855012")
-    const data = await response.json()
-    console.log(data)
-  
+// useEffect(() => {
+//   async function main() {
+//     const response = await fetch ("https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=73855012")
+//     const data = await response.json()
+//     console.log(data)
    
-  }
-  main()
+//   }
+//   main()
+// }, [])
+
 
 
 
