@@ -10,7 +10,7 @@ import axios from "axios";
 const Author = () => {
   const { id } = useParams();
   const [authors, setAuthors] = useState([]);
-  const author = data.find(author => author.id === id);
+  
   
 
 
@@ -26,9 +26,21 @@ const Author = () => {
         `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`
       );
       setAuthors(data);
+      console.log(data)
+
     }
+    
     getId();
-  }, [id]);
+  }, []);
+
+
+
+
+    // const response = await fetch ("https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=73855012")
+    // const data = await response.json()
+    // console.log(data)
+
+
 
 // useEffect(() => {
 //   async function main() {
@@ -65,46 +77,52 @@ const Author = () => {
 
         <section aria-label="section">
           <div className="container">
+{
+  authors?.map((author) => {
+    return(
+      <div className="row">
+      <div className="col-md-12">
+        <div className="d_profile de-flex">
+          <div className="de-flex-col">
+            <div className="profile_avatar">
+              <img src={AuthorImage} alt="" />
 
-            <div className="row">
-              <div className="col-md-12">
-                <div className="d_profile de-flex">
-                  <div className="de-flex-col">
-                    <div className="profile_avatar">
-                      <img src={AuthorImage} alt="" />
-
-                      <i className="fa fa-check"></i>
-                      <div className="profile_name">
-                        <h4>
-                          Monica Lewis
-                          <span className="profile_username">@monicaaaa</span>
-                          <span id="wallet" className="profile_wallet">
-                            UDHUHWudhwd78wdt7edb32uidbwyuidhg7wUHIFUHWewiqdj87dy7
-                          </span>
-                          <button id="btn_copy" title="Copy Text">
-                            Copy
-                          </button>
-                        </h4>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="profile_follow de-flex">
-                    <div className="de-flex-col">
-                      <div className="profile_follower">573 followers</div>
-                      <Link to="#" className="btn-main">
-                        Follow
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-12">
-                <div className="de_tab tab_simple">
-                  <AuthorItems />
-                </div>
+              <i className="fa fa-check"></i>
+              <div className="profile_name">
+                <h4>
+                  Monica Lewis
+                  <span className="profile_username">@monicaaaa</span>
+                  <span id="wallet" className="profile_wallet">
+                    UDHUHWudhwd78wdt7edb32uidbwyuidhg7wUHIFUHWewiqdj87dy7
+                  </span>
+                  <button id="btn_copy" title="Copy Text">
+                    Copy
+                  </button>
+                </h4>
               </div>
             </div>
+          </div>
+          <div className="profile_follow de-flex">
+            <div className="de-flex-col">
+              <div className="profile_follower">573 followers</div>
+              <Link to="#" className="btn-main">
+                Follow
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="col-md-12">
+        <div className="de_tab tab_simple">
+          <AuthorItems />
+        </div>
+      </div>
+    </div>
+    )
+  })
+}
+        
           </div>
         </section>
       </div>
