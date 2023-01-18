@@ -5,29 +5,55 @@ import { Link, useParams } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
 import axios from "axios";
 
-
 const Author = () => {
   const { id } = useParams();
   const [authors, setAuthors] = useState([]);
+  const author = authors.find(author => author.id === 6);
+
+
+
+
 
   
-  useEffect(() => {
-    async function getId() {
-      const { data } = await axios.get(
-        `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`
-      );
-      setAuthors(data);
-    }
-    getId();
-  }, [id]);
+
+
+
+
+
+
+
+  // useEffect(() => {
+  //   async function getId() {
+  //     const { data } = await axios.get(
+  //       `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`
+  //     );
+  //     setAuthors(data);
+  //   }
+  //   getId();
+  // }, [id]);
+
+
+  async function main() {
+    const response = await fetch ("https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=73855012")
+    const data = await response.json()
+    console.log(data)
+  
+   
+  }
+  main()
+
+
+
+
+
 
 
 
   return (
    
     <div id="wrapper">
-  
-                <div className="no-bottom no-top" id="content">
+      
+      <div className="no-bottom no-top" id="content">
         <div id="top"></div>
 
         <section
@@ -38,9 +64,9 @@ const Author = () => {
           style={{ background: `url(${AuthorBanner}) top` }}
         ></section>
 
-       <section aria-label="section">
+        <section aria-label="section">
+          <div className="container">
 
-                <div className="container">
             <div className="row">
               <div className="col-md-12">
                 <div className="d_profile de-flex">
@@ -81,14 +107,8 @@ const Author = () => {
               </div>
             </div>
           </div>
-      
-        
         </section>
- 
-       
       </div>
-        
-  
     </div>
   );
 };
