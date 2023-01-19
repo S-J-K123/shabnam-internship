@@ -7,45 +7,19 @@ import axios from "axios";
 
 const Author = () => {
   const { id } = useParams();
-  const [authors, setAuthors] = useState([]);
+  const [author, setAuthors] = useState({});
 
-  // useEffect(() => {
-  //   async function getId() {
-  //     const { data } = await axios.get(
-  //       `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`
-  //     );
-  //     setAuthors(data);
-  //     console.log(data)
+useEffect(() => {
+axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=" + id ).then(
+  data => {
+    console.log(data.data)
+    setAuthors(data.data)
+  }
+  
+)
+},[])
 
-  //   }
 
-  //   getId();
-  // }, [id]);
-
-  useEffect(() => {
-    async function getId() {
-      const response = await fetch(
-        "https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=73855012"
-      );
-      const data = await response.json();
-      setAuthors(data);
-      console.log(data);
-      const author = authors.find((author) => author.id === id);
-      console.log(authors);
-    }
-
-    getId();
-  }, [id]);
-
-  // useEffect(() => {
-  //   async function main() {
-  //     const response = await fetch ("https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=73855012")
-  //     const data = await response.json()
-  //     console.log(data)
-
-  //   }
-  //   main()
-  // }, [])
 
   return (
     <div id="wrapper">
@@ -67,33 +41,33 @@ const Author = () => {
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
                     <div className="profile_avatar">
-                      <img src={AuthorImage} alt="" />
+                      <img src={author.authorImage} alt="" />
 
-                      {authors?.map((author) => {
-                        return (
+                    
+                      
                           <div className="profile_name">
                             <h4>
-                              Monica Lewis
+                              {author.authorName}
                               <span className="profile_username">
-                                @monicaaaa
+                               {author.tag}
                               </span>
                               <span id="wallet" className="profile_wallet">
-                                UDHUHWudhwd78wdt7edb32uidbwyuidhg7wUHIFUHWewiqdj87dy7
+                                {author.address}
                               </span>
                               <button id="btn_copy" title="Copy Text">
                                 Copy
                               </button>
                             </h4>
                           </div>
-                        );
-                      })}
+                        
+                   
                       <i className="fa fa-check"></i>
                     </div>
                   </div>
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">
                       <div className="profile_follower">
-                        {authors.followers}
+                        {author.followers}  followers
                       </div>
                       <Link to="#" className="btn-main">
                         Follow
@@ -105,7 +79,7 @@ const Author = () => {
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  <AuthorItems />
+                  <AuthorItems nftCollection={author.nftCollection} authorImage={author.authorImage} />
                 </div>
               </div>
             </div>

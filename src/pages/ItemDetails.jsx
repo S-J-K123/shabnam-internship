@@ -64,7 +64,7 @@ const ItemDetails = () => {
                       <h6>Owner</h6>
                       <div className="item_author">
                         <div className="author_list_pp">
-                          <Link to="/author">
+                          <Link to={`/author/${images.ownerId}`}>
                             <img
                               className="lazy"
                               src={images.ownerImage}
@@ -75,7 +75,7 @@ const ItemDetails = () => {
                         </div>
                         
                         <div className="author_list_info">
-                          <Link to="/author">{images.ownerName}</Link>
+                          <Link to={`/author/${images.ownerId}`}>{images.ownerName}</Link>
                         </div>
                       </div>
                     </div>
@@ -85,7 +85,7 @@ const ItemDetails = () => {
                       <h6>Creator</h6>
                       <div className="item_author">
                         <div className="author_list_pp">
-                          <Link to="/author">
+                          <Link to={`/author/${images.ownerId}`}> 
                             <img
                               className="lazy"
                               src={images.creatorImage}
@@ -95,7 +95,7 @@ const ItemDetails = () => {
                           </Link>
                         </div>
                         <div className="author_list_info">
-                          <Link to="/author">{images.creatorName}</Link>
+                          <Link to={`/author/${images.ownerId}`}>{images.creatorName}</Link>
                         </div>
                       </div>
                     </div>
