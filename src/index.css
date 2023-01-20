@@ -162,13 +162,10 @@
  
 } */
 
-
-.skeleton-author{
+.skeleton-author {
   display: flex;
   flex-direction: row;
 }
-
-
 
 /* Hot Collections */
 @media (max-width: 500px) {

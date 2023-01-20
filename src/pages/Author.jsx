@@ -25,6 +25,10 @@ const Author = () => {
     />
   ));
 
+
+
+
+
   function increment() {
     setAuthors({ ...author, followers: author.followers + 1 });
   }
@@ -109,7 +113,7 @@ const Author = () => {
                             className="btn-main"
                             onClick={() => setShowModal(false)}
                           >
-                            unFollow
+                            Unfollow
                           </Link>
                         )}
                       </div>
