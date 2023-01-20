@@ -8,12 +8,30 @@ import { Skeleton } from "@mui/material";
 import AuthorSkeleton from "../components/UI/AuthorSkeleton";
 
 const Author = () => {
+  let isModalOpen = false;
+
   const { id } = useParams();
   const [author, setAuthors] = useState({});
   const [loading, setLoading] = useState(true);
-  const loadingCards = [...Array(8)].map((e, i) => <Skeleton width={"250px"}
-  height={"470px"} key={i} />);
+  const [follow, setFollow] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
+  const loadingCards = [...Array(8)].map((e, i) => (
+    <Skeleton
+      className="skeleton-author"
+      width={"250px"}
+      height={"470px"}
+      key={i}
+    />
+  ));
+
+  function increment() {
+    setAuthors({ ...author, followers: author.followers + 1 });
+  }
+
+  function decrement() {
+    setAuthors({ ...author, followers: author.followers - 1 });
+  }
 
   useEffect(() => {
     axios
@@ -25,7 +43,7 @@ const Author = () => {
         console.log(data.data);
         setAuthors(data.data);
         setTimeout(() => {
-          setLoading(true);
+          setLoading(false);
         }, 1000);
       });
   }, []);
@@ -78,9 +96,22 @@ const Author = () => {
                         <div className="profile_follower">
                           {author.followers} followers
                         </div>
-                        <Link to="#" className="btn-main">
+                        <Link
+                          to="#"
+                          className="btn-main"
+                          onClick={() => setShowModal(true)} 
+                        >
                           Follow
                         </Link>
+                        {showModal && (
+                          <Link
+                            to="#"
+                            className="btn-main"
+                            onClick={() => setShowModal(false)}
+                          >
+                            unFollow
+                          </Link>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -89,18 +120,16 @@ const Author = () => {
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  {
-                    loading ? loadingCards:
+                  {loading ? (
+                    loadingCards
+                  ) : (
                     <AuthorItems
-                    nftCollection={author.nftCollection}
-                    authorImage={author.authorImage}
-                       />
-                  }
-                  
-               
+                      nftCollection={author.nftCollection}
+                      authorImage={author.authorImage}
+                    />
+                  )}
                 </div>
               </div>
-              
             </div>
           </div>
         </section>
