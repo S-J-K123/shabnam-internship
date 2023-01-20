@@ -154,6 +154,14 @@
   right: 0;
 }
 
+/* .loading-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 70px;
+ 
+} */
+
 
 /* Hot Collections */
 @media (max-width: 500px) {
