@@ -154,6 +154,20 @@
   right: 0;
 }
 
+/* .loading-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 70px;
+ 
+} */
+
+.skeleton-author {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
 /* Hot Collections */
 @media (max-width: 500px) {
