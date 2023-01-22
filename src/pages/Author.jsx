@@ -2,19 +2,28 @@ import React, { useEffect, useState } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
 import { Link, useParams } from "react-router-dom";
-import AuthorImage from "../images/author_thumbnail.jpg";
 import axios from "axios";
 import { Skeleton } from "@mui/material";
 import AuthorSkeleton from "../components/UI/AuthorSkeleton";
 
 const Author = () => {
-  let isModalOpen = false;
+  
 
   const { id } = useParams();
   const [author, setAuthors] = useState({});
   const [loading, setLoading] = useState(true);
-  const [follow, setFollow] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [showFollow, setShowFollow] = useState(false);
+  const [follow, setFollow] = useState({followers: 0})
+
+
+
+  const handleFollow = () => {
+    setFollow(prevFollow => {
+        return { ...prevFollow, followers: prevFollow.followers + 1 }
+    });
+}
+
+
 
   const loadingCards = [...Array(8)].map((e, i) => (
     <Skeleton
@@ -27,15 +36,15 @@ const Author = () => {
 
 
 
+  // function increment() {
+  //   setAuthors({ ...author, followers: author.followers + 1 });
+  // }
+
+  // function decrement() {
+  //   setAuthors({ ...author, followers: author.followers - 1 });
+  // }
 
 
-  function increment() {
-    setAuthors({ ...author, followers: author.followers + 1 });
-  }
-
-  function decrement() {
-    setAuthors({ ...author, followers: author.followers - 1 });
-  }
 
   useEffect(() => {
     axios
@@ -50,7 +59,7 @@ const Author = () => {
           setLoading(false);
         }, 1000);
       });
-  }, []);
+  }, [id]);
 
   return (
     <div id="wrapper">
@@ -103,19 +112,12 @@ const Author = () => {
                         <Link
                           to="#"
                           className="btn-main"
-                          onClick={() => setShowModal(true)} 
+                          onClick={() => setShowFollow(!showFollow)} 
+                        
                         >
-                          Follow
+                          {!showFollow ? "Follow" : "Unfollow"}
                         </Link>
-                        {showModal && (
-                          <Link
-                            to="#"
-                            className="btn-main"
-                            onClick={() => setShowModal(false)}
-                          >
-                            Unfollow
-                          </Link>
-                        )}
+                    
                       </div>
                     </div>
                   </div>
