@@ -11,13 +11,12 @@ const ExploreItems = () => {
 
   const { id } = useParams();
   const [posts, setPosts] = useState([]);
+  const [visible, setVisible] = useState(4)
 
 
-  const load= () => {
-    Array.slice().map(0,4)
-  }
-
-
+const loadMore = () => {
+  setVisible(visible + 4)
+}
 
 
   useEffect(() => {
@@ -33,6 +32,9 @@ const ExploreItems = () => {
     }
     exploreId();
   }, [id]);
+
+  
+
   return (
     <>
       <div>
@@ -107,7 +109,7 @@ const ExploreItems = () => {
         </div>
       ))}
       <div className="col-md-12 text-center">
-        <Link onClick={load} to="" id="loadmore" className="btn-main lead">
+        <Link onClick={loadMore} to="" id="loadmore" className="btn-main lead">
           Load more
         </Link>
       </div>
