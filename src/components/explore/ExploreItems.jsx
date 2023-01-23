@@ -6,17 +6,33 @@ import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 import Timer from "../Timer";
 const ExploreItems = () => {
-  const { id } = useParams()
-  const [posts, setPosts] = useState({})
-  useEffect(() => {
-  async function exploreId() {
-   axios.get("https://us-central1-nft-cloud-functions.cloudfunctions.net/explore/" + id).then((data) =>{
-    console.log(data.data)
-    setPosts(data.data)
-   })
+
+
+
+  const { id } = useParams();
+  const [posts, setPosts] = useState([]);
+
+
+  const load= () => {
+    Array.slice().map(0,4)
   }
-  exploreId()
-  }, [id])
+
+
+
+
+  useEffect(() => {
+    async function exploreId() {
+      axios
+        .get(
+          "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore/"
+        )
+        .then((data) => {
+          console.log(data.data);
+          setPosts(data.data);
+        });
+    }
+    exploreId();
+  }, [id]);
   return (
     <>
       <div>
@@ -44,7 +60,13 @@ const ExploreItems = () => {
                 <i className="fa fa-check"></i>
               </Link>
             </div>
-            <div className="de_countdown"><Timer expiryDate={post.expiryDate} /></div>
+            {post.expiryDate ? (
+                        <div className="de_countdown">
+                          {" "} 
+                          <Timer expiryDate={post.expiryDate} />{" "}
+                        </div>
+                      ) : null}
+
             <div className="nft__item_wrap">
               <div className="nft__item_extra">
                 <div className="nft__item_buttons">
@@ -64,7 +86,11 @@ const ExploreItems = () => {
                 </div>
               </div>
               <Link to="/item-details">
-                <img src={post.nftImage} className="lazy nft__item_preview" alt="" />
+                <img
+                  src={post.nftImage}
+                  className="lazy nft__item_preview"
+                  alt=""
+                />
               </Link>
             </div>
             <div className="nft__item_info">
@@ -81,7 +107,7 @@ const ExploreItems = () => {
         </div>
       ))}
       <div className="col-md-12 text-center">
-        <Link to="" id="loadmore" className="btn-main lead">
+        <Link onClick={load} to="" id="loadmore" className="btn-main lead">
           Load more
         </Link>
       </div>
