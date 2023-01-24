@@ -5,18 +5,40 @@ import { Link, useParams } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 import Timer from "../Timer";
+
+
+
 const ExploreItems = () => {
-
-
-
   const { id } = useParams();
   const [posts, setPosts] = useState([]);
-  const [visible, setVisible] = useState(4)
+  const [visible, setVisible] = useState(4);
+  const [price, setPrice] = useState({});
+
+  const loadMore = () => {
+    setVisible((visible) => visible + 4);
+  };
 
 
-const loadMore = () => {
-  setVisible(visible + 4)
+
+function filterBooks(filter) {
+  console.log(filter)
 }
+
+
+  useEffect(() => {
+    async function sortPrice() {
+      axios
+        .get(
+          "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=price_low_to_high"
+        )
+        .then((data) => {
+          setPrice(data.data);
+          console.log(data)
+        });
+    }
+    sortPrice();
+  }, []);
+
 
 
   useEffect(() => {
@@ -33,19 +55,26 @@ const loadMore = () => {
     exploreId();
   }, [id]);
 
-  
-
   return (
-    <>
-      <div>
-        <select id="filter-items" defaultValue="">
+    <> 
+      {
+        data.map((price) => {
+          return(
+                 <div>
+        <select id="filter-items" defaultValue="" onChange={(event) => filterBooks(event.target.value)}>
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
           <option value="likes_high_to_low">Most liked</option>
         </select>
       </div>
-      {posts.map((post, index) => (
+          )
+        })
+      }
+           
+        
+
+      {posts.slice(0, visible).map((post, index) => (
         <div
           key={index}
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
@@ -54,7 +83,7 @@ const loadMore = () => {
           <div className="nft__item">
             <div className="author_list_pp">
               <Link
-                to="/author"
+                to={`/author/${post.authorId}`}  
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
               >
@@ -63,11 +92,11 @@ const loadMore = () => {
               </Link>
             </div>
             {post.expiryDate ? (
-                        <div className="de_countdown">
-                          {" "} 
-                          <Timer expiryDate={post.expiryDate} />{" "}
-                        </div>
-                      ) : null}
+              <div className="de_countdown">
+                {" "}
+                <Timer expiryDate={post.expiryDate} />{" "}
+              </div>
+            ) : null}
 
             <div className="nft__item_wrap">
               <div className="nft__item_extra">
@@ -87,7 +116,7 @@ const loadMore = () => {
                   </div>
                 </div>
               </div>
-              <Link to="/item-details">
+              <Link to={`/item-details/${post.nftId}`}> 
                 <img
                   src={post.nftImage}
                   className="lazy nft__item_preview"
@@ -99,7 +128,7 @@ const loadMore = () => {
               <Link to="/item-details">
                 <h4>{post.title}</h4>
               </Link>
-              <div className="nft__item_price">{posts.price}</div>
+              <div className="nft__item_price">{post.price}</div>
               <div className="nft__item_like">
                 <i className="fa fa-heart"></i>
                 <span>{post.likes}</span>
