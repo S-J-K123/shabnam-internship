@@ -35,6 +35,7 @@ const Author = () => {
       }, 1000)
     })
     // scroll to the top of the page
+    window.scrollTo(0, 0)
   }, [id])
 
   // store the number of followers in some state

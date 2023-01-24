@@ -6,24 +6,20 @@ import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 import Timer from "../Timer";
 
-
-
 const ExploreItems = () => {
   const { id } = useParams();
   const [posts, setPosts] = useState([]);
   const [visible, setVisible] = useState(4);
-  const [price, setPrice] = useState({});
+  const [price, setPrice] = useState([]);
 
   const loadMore = () => {
     setVisible((visible) => visible + 4);
   };
 
-
-
-function filterBooks(filter) {
-  console.log(filter)
-}
-
+  function filterPrice(filter) {
+    console.log(filter);
+   
+  }
 
   useEffect(() => {
     async function sortPrice() {
@@ -33,13 +29,11 @@ function filterBooks(filter) {
         )
         .then((data) => {
           setPrice(data.data);
-          console.log(data)
+          console.log(data);
         });
     }
     sortPrice();
   }, []);
-
-
 
   useEffect(() => {
     async function exploreId() {
@@ -56,23 +50,19 @@ function filterBooks(filter) {
   }, [id]);
 
   return (
-    <> 
-      {
-        data.map((price) => {
-          return(
-                 <div>
-        <select id="filter-items" defaultValue="" onChange={(event) => filterBooks(event.target.value)}>
+    <>
+      <div>
+        <select
+          id="filter-items"
+          defaultValue=""
+          onChange={(event) => filterPrice(event.target.value)}
+        >
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
           <option value="likes_high_to_low">Most liked</option>
         </select>
       </div>
-          )
-        })
-      }
-           
-        
 
       {posts.slice(0, visible).map((post, index) => (
         <div
@@ -83,7 +73,7 @@ function filterBooks(filter) {
           <div className="nft__item">
             <div className="author_list_pp">
               <Link
-                to={`/author/${post.authorId}`}  
+                to={`/author/${post.authorId}`}
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
               >
@@ -116,7 +106,7 @@ function filterBooks(filter) {
                   </div>
                 </div>
               </div>
-              <Link to={`/item-details/${post.nftId}`}> 
+              <Link to={`/item-details/${post.nftId}`}>
                 <img
                   src={post.nftImage}
                   className="lazy nft__item_preview"
