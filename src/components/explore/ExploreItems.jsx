@@ -16,10 +16,22 @@ const ExploreItems = () => {
     setVisible((visible) => visible + 4);
   };
 
-  function filterPrice(filter) {
-    console.log(filter);
-   
-  }
+ 
+    async function filterPrice(filter) {
+      axios
+        .get(
+          `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${filter}`
+        )
+        .then((data) => {
+          setPrice(data.data);
+          console.log(filter);
+        });
+    }
+    
+
+
+
+  
 
   useEffect(() => {
     async function sortPrice() {
@@ -34,6 +46,10 @@ const ExploreItems = () => {
     }
     sortPrice();
   }, []);
+
+
+
+
 
   useEffect(() => {
     async function exploreId() {
