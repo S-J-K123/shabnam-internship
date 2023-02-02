@@ -20,7 +20,7 @@ const ExploreItems = () => {
     async function filterPrice(filter) {
       axios
         .get(
-          `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${filter}`
+          "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=price_low_to_high"
         )
         .then((data) => {
           setPrice(data.data);
@@ -29,24 +29,18 @@ const ExploreItems = () => {
     }
     
 
+    // const filterPrice = (value) => {
+    //   if (value === "price_high_to_low") {
+    //     setPosts(posts.sort((a, b) => b.price - a.price));
+    //   } else {
+    //     setPosts(posts.sort((a, b) => a.price - b.price));
+    //   }
+    // };
+    
+
 
 
   
-
-  useEffect(() => {
-    async function sortPrice() {
-      axios
-        .get(
-          "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=price_low_to_high"
-        )
-        .then((data) => {
-          setPrice(data.data);
-          console.log(data);
-        });
-    }
-    sortPrice();
-  }, []);
-
 
 
 
