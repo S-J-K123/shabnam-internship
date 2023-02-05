@@ -10,23 +10,19 @@ const ExploreItems = () => {
   const { id } = useParams();
   const [posts, setPosts] = useState([]);
   const [visible, setVisible] = useState(4);
-  const [price, setPrice] = useState([]);
+  const [filter, setFilter] = useState("");
 
   const loadMore = () => {
     setVisible((visible) => visible + 4);
   };
 
+
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value);
+  };
+
  
-    async function filterPrice(filter) {
-      axios
-        .get(
-          "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=price_low_to_high"
-        )
-        .then((data) => {
-          setPrice(data.data);
-          console.log(filter);
-        });
-    }
+ 
     
 
     // const filterPrice = (value) => {
@@ -65,7 +61,7 @@ const ExploreItems = () => {
         <select
           id="filter-items"
           defaultValue=""
-          onChange={(event) => filterPrice(event.target.value)}
+          onChange={handleFilterChange}
         >
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
@@ -74,7 +70,22 @@ const ExploreItems = () => {
         </select>
       </div>
 
-      {posts.slice(0, visible).map((post, index) => (
+
+
+      {posts
+      .filter(post => {
+        switch (filter) {
+          case "price_low_to_high":
+            return true;
+          case "price_high_to_low":
+            return true;
+          case "likes_high_to_low":
+            return true;
+          default:
+            return true;
+        }
+      })
+      .slice(0, visible).map((post, index) => (
         <div
           key={index}
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
