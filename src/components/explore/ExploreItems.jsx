@@ -1,3 +1,4 @@
+import { Skeleton } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
@@ -10,7 +11,7 @@ const ExploreItems = () => {
   const { id } = useParams();
   const [posts, setPosts] = useState([]);
   const [visible, setVisible] = useState(4);
-  const [filter, setFilter] = useState("");
+  const [loading, setLoading] = useState(true)
 
   const loadMore = () => {
     setVisible((visible) => visible + 4);
@@ -18,22 +19,21 @@ const ExploreItems = () => {
 
 
   const handleFilterChange = (event) => {
-    setFilter(event.target.value);
+   setLoading(true)
+
+   let filterURL =   `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${event.target.value}`
+   if(event.target.value === "default") {
+    filterURL = "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore/"
+   }
+   axios.get (filterURL).then(data =>{
+    setPosts(data.data)
+    setLoading(false)
+   })
   };
 
  
  
     
-
-    // const filterPrice = (value) => {
-    //   if (value === "price_high_to_low") {
-    //     setPosts(posts.sort((a, b) => b.price - a.price));
-    //   } else {
-    //     setPosts(posts.sort((a, b) => a.price - b.price));
-    //   }
-    // };
-    
-
 
 
   
@@ -50,6 +50,9 @@ const ExploreItems = () => {
         .then((data) => {
           console.log(data.data);
           setPosts(data.data);
+          setTimeout(() => {
+             setLoading(false)
+          }, 2000)
         });
     }
     exploreId();
@@ -60,10 +63,10 @@ const ExploreItems = () => {
       <div>
         <select
           id="filter-items"
-          defaultValue=""
+          defaultValue="default"
           onChange={handleFilterChange}
         >
-          <option value="">Default</option>
+          <option value="default">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
           <option value="likes_high_to_low">Most liked</option>
@@ -72,26 +75,20 @@ const ExploreItems = () => {
 
 
 
-      {posts
-      .filter(post => {
-        switch (filter) {
-          case "price_low_to_high":
-            return true;
-          case "price_high_to_low":
-            return true;
-          case "likes_high_to_low":
-            return true;
-          default:
-            return true;
-        }
-      })
-      .slice(0, visible).map((post, index) => (
+      {posts.slice(0, visible).map((post, index) => (
         <div
           key={index}
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
           style={{ display: "block", backgroundSize: "cover" }}
         >
-          <div className="nft__item">
+
+          {
+            loading ? (
+              <Skeleton width={"300px"}
+              height={"500px"}/>
+            ) :
+            (
+                 <div className="nft__item">
             <div className="author_list_pp">
               <Link
                 to={`/author/${post.authorId}`}
@@ -146,6 +143,9 @@ const ExploreItems = () => {
               </div>
             </div>
           </div>
+            )
+          }
+       
         </div>
       ))}
       <div className="col-md-12 text-center">
