@@ -1,8 +1,24 @@
 import React from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
 
 const LandingIntro = () => {
+  useEffect(() => {
+    AOS.init();
+  }, [])
+
+
+
   return (
-    <section id="section-intro" className="no-top no-bottom">
+    <section id="section-intro" className="no-top no-bottom"   data-aos="slide-up"
+    data-aos-offset="200"
+    data-aos-delay="50"
+    data-aos-duration="1000"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="true"
+    data-aos-anchor-placement="top-center">
       <div className="container">
         <div className="row">
           <div className="col-lg-4 col-md-6 mb-sm-30">

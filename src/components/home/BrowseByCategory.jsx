@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+
+
 
 const BrowseByCategory = () => {
+  useEffect(() => {
+    AOS.init();
+  })
+
+
+
+
   return (
-    <section id="section-category" className="no-top">
+    <section id="section-category" className="no-top"    data-aos="fade-up"
+    data-aos-offset="200"
+    data-aos-delay="50"
+    data-aos-duration="1000"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="false"
+    data-aos-anchor-placement="top-center">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
