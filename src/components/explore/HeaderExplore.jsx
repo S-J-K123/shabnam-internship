@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const HeaderExplore = () => {
+  useEffect(() => {
+    AOS.init();
+  })
   return (
     <div className="col-lg-12">
       <div className="items_filter">
@@ -26,8 +31,16 @@ const HeaderExplore = () => {
           </div>
         </form>
 
-        <div id="item_category" className="dropdown">
-          <a href="#" className="btn-selector">
+        <div id="item_category" className="dropdown"     data-aos="fade-up"
+    data-aos-offset="200"
+    data-aos-delay="50"
+    data-aos-duration="1000"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="false"
+    data-aos-anchor-placement="top-center"
+>
+          <a href="#" className="btn-selector" >
             All categories
           </a>
           <ul>

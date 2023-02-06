@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../images/Ultraverse.png";
 
+
 const Footer = () => {
+
   return (
     <footer className="footer-light">
       <div className="container">
